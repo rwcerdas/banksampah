@@ -1,6 +1,8 @@
-# EcoBank Installation Guide
+# Panduan Instalasi EcoBank (Lokal)
 
-Panduan instalasi untuk pembeli buku EcoBank.
+Panduan instalasi untuk menjalankan EcoBank di laptop/PC (development atau uji coba).
+
+Untuk **server production** (domain, HTTPS, nginx), lihat [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Persyaratan
 
@@ -13,8 +15,8 @@ Panduan instalasi untuk pembeli buku EcoBank.
 ### 1. Clone repository
 
 ```bash
-git clone https://github.com/YOUR_ORG/EcoBank.git
-cd EcoBank
+git clone https://github.com/rwcerdas/banksampah.git
+cd banksampah
 ```
 
 ### 2. Konfigurasi environment
@@ -33,9 +35,16 @@ Opsional: isi `GEMINI_API_KEY` untuk fitur AI Insight di laporan.
 docker compose up -d
 ```
 
-Tunggu ~30 detik hingga semua container running.
+Tunggu sekitar 30 detik hingga semua container berjalan.
 
-### 4. Setup awal (first run)
+Cek status:
+
+```bash
+docker compose ps
+docker compose logs -f backend
+```
+
+### 4. Setup awal (pertama kali)
 
 1. Buka http://localhost:5174
 2. Isi wizard setup:
@@ -56,24 +65,29 @@ Tunggu ~30 detik hingga semua container running.
 ## Install PWA di HP (Nasabah)
 
 1. Buka `/nasabah` di browser Chrome/Safari
-2. Tap **Add to Home Screen** / **Install App**
+2. Ketuk **Add to Home Screen** / **Install App**
 3. Nasabah bisa cek saldo seperti aplikasi native
 
 ## Production
 
+Jangan hanya menjalankan `docker-compose.prod.yml` tanpa reverse proxy jika ingin HTTPS publik.
+
+Gunakan script dan panduan lengkap:
+
 ```bash
-docker compose -f docker-compose.prod.yml up -d
+sudo bash scripts/deploy.sh
 ```
 
-Frontend di port **8081**, backend di **3001**.
+Lihat: [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ## Troubleshooting
 
 | Masalah | Solusi |
 |---------|--------|
-| Port sudah dipakai | Ubah port di `docker-compose.yml` |
-| Setup wizard tidak muncul | Pastikan MongoDB running, cek `docker compose logs backend` |
-| Login gagal | Reset DB: `docker compose down -v` lalu setup ulang |
+| Port sudah dipakai | Ubah mapping port di `docker-compose.yml` |
+| Setup wizard tidak muncul | Pastikan MongoDB running: `docker compose logs backend` |
+| Login gagal / data kotor | Reset volume: `docker compose down -v` lalu setup ulang |
+| `JWT_SECRET` masih default | Edit `.env` lalu `docker compose up -d --force-recreate backend` |
 
 ## Support
 

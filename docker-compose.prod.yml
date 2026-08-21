@@ -5,26 +5,30 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "8081:80"
+      # Hanya localhost — nginx di host yang expose 80/443 ke publik
+      - "127.0.0.1:8081:80"
     depends_on:
       - backend
     environment:
-      - VITE_API_BASE_URL=http://localhost:3001
-      - VITE_APP_TITLE=EcoBank
+      # Kosong = same-origin (https://domain/api → proxy di nginx container)
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL:-}
+      - VITE_APP_TITLE=${VITE_APP_TITLE:-EcoBank}
     networks:
       - ecobank_net
+    restart: unless-stopped
 
   backend:
     container_name: ecobank-backend-prod
     build:
       context: ./backend
       dockerfile: Dockerfile
-    ports:
-      - "3001:3000"
+    # Tidak publish port ke host — akses hanya lewat jaringan Docker (frontend nginx)
     env_file:
       - .env
     environment:
-      - MONGO_URI=mongodb://root:example@mongodb:27017/ecobank?authSource=admin
+      - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME:-root}:${MONGO_INITDB_ROOT_PASSWORD:-example}@mongodb:27017/ecobank?authSource=admin
+      - JWT_SECRET=${JWT_SECRET}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
     command: npm start
     volumes:
       - ecobank_uploads:/app/uploads
@@ -32,17 +36,19 @@ services:
       - mongodb
     networks:
       - ecobank_net
+    restart: unless-stopped
 
   mongodb:
     image: mongo:7
     container_name: ecobank-mongodb-prod
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-example}
     volumes:
       - ecobank_mongo_data:/data/db
     networks:
       - ecobank_net
+    restart: unless-stopped
 
 volumes:
   ecobank_mongo_data:
