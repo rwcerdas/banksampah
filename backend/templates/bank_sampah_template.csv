@@ -1,0 +1,46 @@
+categoryCode,categoryName,itemCode,itemName,pelapakPrice
+1,Kertas,1.1,Buku Tulis/Pelajaran/Campur,1400
+1,Kertas,1.2,Hvs/Putihan,1700
+1,Kertas,1.3,Kardus/Box,1700
+1,Kertas,1.4,Koran,3000
+1,Kertas,1.5,Majalah/buku LKS,700
+1,Kertas,1.6,Boncos,600
+2,Botol,2.1,Botol Bersih,4500
+2,Botol,2.2,Botol/Gelas mineral kotor,1500
+2,Botol,2.3,Botol warna,500
+2,Botol,2.4,Thinwall,2500
+2,Botol,2.5,Ember Campuran/Emberan,1300
+2,Botol,2.6,Ember hitam/pot bunga,600
+2,Botol,2.7,Gelas bersih,3500
+2,Botol,2.8,Plastik assoy,300
+2,Botol,2.9,PE,500
+2,Botol,2.10,Selang air/Pralon,1000
+2,Botol,2.11,Tutup Botol,2500
+2,Botol,2.12,Tutup galon/LD,4500
+2,Botol,2.13,Botol Galon,3000
+3,Logam,3.1,Alumunium,11000
+3,Logam,3.2,Besi,4100
+3,Logam,3.3,"Kabin, paku, besi krompong, Baja ringan",2600
+3,Logam,3.4,Kaleng,2200
+3,Logam,3.5,Kuningan,30000
+3,Logam,3.6,Seng/Kawat,700
+3,Logam,3.7,Tembaga,70000
+4,Plastik,4.1,"Impact ; R,cesoris motor, Helm, tape",300
+4,Plastik,4.2,Yakult,500
+5,Elektronik Kecil,5.1,Beling,350
+6,Elektronik Besar,6.1,AC 1 Set,200000
+6,Elektronik Besar,6.2,Komputer 1 set,75000
+6,Elektronik Besar,6.3,CPU Komplit,40000
+6,Elektronik Besar,6.4,Kulkas,50000
+6,Elektronik Besar,6.5,Laptop,50000
+6,Elektronik Besar,6.6,Note book,25000
+6,Elektronik Besar,6.7,Mesin cuci komplit,50000
+6,Elektronik Besar,6.8,TV,10000
+7,Aki,7.1,Aki,8000
+8,Kabel,8.1,"K plastik, K. Talang, Kabel",500
+9,Kristal,9.1,"Keping CD, Acrilic, Kristal putih",3500
+10,Minyak,10.1,Minyak Jelantah,4000
+11,Kertas Lainnya,11.1,Stryfoam,1000
+11,Kertas Lainnya,11.2,Tetrapac,100
+11,Kertas Lainnya,11.3,"MLP, Mika, Bungkus nasi",100
+11,Kertas Lainnya,11.4,Kabel,1000

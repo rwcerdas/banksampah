@@ -1,0 +1,496 @@
+@import "@fontsource-variable/inter";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================== */
+/* SAFE AREA / EDGE-TO-EDGE (notch, home bar)  */
+/* ========================================== */
+
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: min(env(safe-area-inset-bottom, 0px), 1.25rem);
+  --sal: env(safe-area-inset-left, 0px);
+  --bottom-nav-h: 3.75rem;
+}
+
+html,
+body,
+#app {
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .pt-safe {
+    padding-top: var(--sat);
+  }
+
+  .pb-safe {
+    padding-bottom: var(--sab);
+  }
+
+  .pl-safe {
+    padding-left: var(--sal);
+  }
+
+  .pr-safe {
+    padding-right: var(--sar);
+  }
+
+  .px-safe {
+    padding-left: var(--sal);
+    padding-right: var(--sar);
+  }
+
+  .pt-header-safe {
+    padding-top: calc(0.75rem + var(--sat));
+  }
+
+  .pb-nav-mobile {
+    padding-bottom: calc(var(--bottom-nav-h) + var(--sab));
+  }
+
+  .min-h-dvh {
+    min-height: 100dvh;
+  }
+
+  .h-dvh {
+    height: 100dvh;
+  }
+
+  .mobile-gutter {
+    @apply px-3 md:px-6;
+  }
+}
+
+@layer components {
+  .section-card {
+    @apply bg-white dark:bg-gray-900 rounded-none sm:rounded-xl py-4 shadow-sm
+           border-y sm:border border-gray-200 dark:border-gray-800
+           border-x-0 sm:border-x px-3 sm:px-5
+           overflow-x-hidden max-w-full;
+  }
+}
+
+/* ========================================== */
+/* PWA NATIVE-LIKE BEHAVIOR                   */
+/* ========================================== */
+
+/* Disable zoom and bounce effects for native-like feel */
+body,
+html {
+  touch-action: pan-y pan-x;
+  /* Allow vertical/horizontal panning, no pinch */
+  -webkit-text-size-adjust: 100%;
+  /* Prevent text auto-sizing on orientation change */
+  overscroll-behavior-y: contain;
+  /* Prevent pull-to-refresh on entire page */
+}
+
+/* Prevent double-tap zoom on specific interactive elements */
+button,
+a,
+input,
+textarea,
+select {
+  touch-action: manipulation;
+  /* Allows single-tap, blocks double-tap zoom */
+}
+
+/* Disable user-select to feel more app-like */
+* {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Remove tap highlight on iOS */
+}
+
+/* Allow text selection on inputs/textareas */
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Allow text selection for content that should be copyable */
+p,
+span,
+div[contenteditable],
+pre,
+code {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+
+
+/* === TailAdmin Font Enforcement Block === */
+:root {
+  /* Force only Inter font, no fallback */
+  font-family: "Inter";
+  font-feature-settings: "cv03", "cv04", "cv11";
+  font-variation-settings: "wght" 500;
+  font-synthesis: none;
+  font-optical-sizing: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.015em;
+}
+
+/* === TailAdmin Typography Preset (Global Apply) === */
+body {
+  @apply font-sans tracking-tight text-gray-700 font-medium;
+  font-family: "Inter", sans-serif;
+  font-variation-settings: "wght" 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  letter-spacing: -0.02em;
+}
+
+/* 🌟 Transition Slide-Fade Skala Enterprise */
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-fade-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+/* ========================================== */
+/* 🧪 CLAYMORPHISM DESIGN SYSTEM              */
+/* ========================================== */
+
+.clay-btn {
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  will-change: transform, box-shadow;
+  user-select: none;
+}
+
+.clay-btn:hover {
+  transform: translateY(-3px) scale(1.06);
+}
+
+.clay-btn:active {
+  transform: translateY(2.5px) scale(0.94) !important;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15), 
+              inset 3.5px 3.5px 7px rgba(0, 0, 0, 0.22), 
+              inset -2px -2px 4px rgba(255, 255, 255, 0.7) !important;
+}
+
+.dark .clay-btn:active {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8), 
+              inset 3.5px 3.5px 7px rgba(0, 0, 0, 0.6), 
+              inset -2px -2px 4px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Clay Variants for Icons & Buttons */
+.clay-blue {
+  background: linear-gradient(145deg, #e0f2fe, #dbeafe);
+  box-shadow: 6px 6px 14px rgba(37, 99, 235, 0.22), 
+              -4px -4px 10px rgba(255, 255, 255, 0.95), 
+              inset 2.5px 2.5px 4px rgba(255, 255, 255, 0.95), 
+              inset -2.5px -2.5px 5px rgba(29, 78, 216, 0.25);
+  color: #1d4ed8;
+}
+.dark .clay-blue {
+  background: linear-gradient(145deg, #1e3a8a, #172554);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6), 
+              -3px -3px 8px rgba(59, 130, 246, 0.2), 
+              inset 2px 2px 4px rgba(147, 197, 253, 0.3), 
+              inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+  color: #60a5fa;
+}
+
+.clay-pink {
+  background: linear-gradient(145deg, #fce7f3, #fbcfe8);
+  box-shadow: 6px 6px 14px rgba(219, 39, 119, 0.22), 
+              -4px -4px 10px rgba(255, 255, 255, 0.95), 
+              inset 2.5px 2.5px 4px rgba(255, 255, 255, 0.95), 
+              inset -2.5px -2.5px 5px rgba(190, 18, 60, 0.25);
+  color: #be123c;
+}
+.dark .clay-pink {
+  background: linear-gradient(145deg, #831843, #500724);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6), 
+              -3px -3px 8px rgba(244, 114, 182, 0.2), 
+              inset 2px 2px 4px rgba(248, 113, 113, 0.3), 
+              inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+  color: #f472b6;
+}
+
+.clay-emerald {
+  background: linear-gradient(145deg, #d1fae5, #a7f3d0);
+  box-shadow: 6px 6px 14px rgba(5, 150, 105, 0.22), 
+              -4px -4px 10px rgba(255, 255, 255, 0.95), 
+              inset 2.5px 2.5px 4px rgba(255, 255, 255, 0.95), 
+              inset -2.5px -2.5px 5px rgba(4, 120, 87, 0.25);
+  color: #047857;
+}
+.dark .clay-emerald {
+  background: linear-gradient(145deg, #064e3b, #022c22);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6), 
+              -3px -3px 8px rgba(52, 211, 153, 0.2), 
+              inset 2px 2px 4px rgba(167, 243, 208, 0.3), 
+              inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+  color: #34d399;
+}
+
+.clay-slate {
+  background: linear-gradient(145deg, #f1f5f9, #e2e8f0);
+  box-shadow: 6px 6px 14px rgba(71, 85, 105, 0.22), 
+              -4px -4px 10px rgba(255, 255, 255, 0.95), 
+              inset 2.5px 2.5px 4px rgba(255, 255, 255, 0.95), 
+              inset -2.5px -2.5px 5px rgba(30, 41, 59, 0.25);
+  color: #334155;
+}
+.dark .clay-slate {
+  background: linear-gradient(145deg, #334155, #0f172a);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6), 
+              -3px -3px 8px rgba(148, 163, 184, 0.2), 
+              inset 2px 2px 4px rgba(203, 213, 225, 0.25), 
+              inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+  color: #cbd5e1;
+}
+
+.clay-amber {
+  background: linear-gradient(145deg, #fef3c7, #fde68a);
+  box-shadow: 6px 6px 14px rgba(217, 119, 6, 0.22), 
+              -4px -4px 10px rgba(255, 255, 255, 0.95), 
+              inset 2.5px 2.5px 4px rgba(255, 255, 255, 0.95), 
+              inset -2.5px -2.5px 5px rgba(180, 83, 9, 0.25);
+  color: #b45309;
+}
+.dark .clay-amber {
+  background: linear-gradient(145deg, #78350f, #451a03);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6), 
+              -3px -3px 8px rgba(251, 191, 36, 0.2), 
+              inset 2px 2px 4px rgba(253, 230, 138, 0.3), 
+              inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+  color: #fbbf24;
+}
+
+.clay-indigo {
+  background: linear-gradient(145deg, #e0e7ff, #c7d2fe);
+  box-shadow: 6px 6px 14px rgba(79, 70, 229, 0.22), 
+              -4px -4px 10px rgba(255, 255, 255, 0.95), 
+              inset 2.5px 2.5px 4px rgba(255, 255, 255, 0.95), 
+              inset -2.5px -2.5px 5px rgba(67, 56, 202, 0.25);
+  color: #4338ca;
+}
+.dark .clay-indigo {
+  background: linear-gradient(145deg, #312e81, #1e1b4b);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6), 
+              -3px -3px 8px rgba(129, 140, 248, 0.2), 
+              inset 2px 2px 4px rgba(199, 210, 254, 0.3), 
+              inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+  color: #a5b4fc;
+}
+
+.clay-sky {
+  background: linear-gradient(145deg, #e0f2fe, #bae6fd);
+  box-shadow: 6px 6px 14px rgba(2, 132, 199, 0.22), 
+              -4px -4px 10px rgba(255, 255, 255, 0.95), 
+              inset 2.5px 2.5px 4px rgba(255, 255, 255, 0.95), 
+              inset -2.5px -2.5px 5px rgba(3, 105, 161, 0.25);
+  color: #0369a1;
+}
+.dark .clay-sky {
+  background: linear-gradient(145deg, #075985, #082f49);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6), 
+              -3px -3px 8px rgba(56, 189, 248, 0.2), 
+              inset 2px 2px 4px rgba(186, 230, 253, 0.3), 
+              inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+  color: #38bdf8;
+}
+
+.clay-violet {
+  background: linear-gradient(145deg, #ede9fe, #ddd6fe);
+  box-shadow: 6px 6px 14px rgba(124, 58, 237, 0.22), 
+              -4px -4px 10px rgba(255, 255, 255, 0.95), 
+              inset 2.5px 2.5px 4px rgba(255, 255, 255, 0.95), 
+              inset -2.5px -2.5px 5px rgba(109, 40, 217, 0.25);
+  color: #6d28d9;
+}
+.dark .clay-violet {
+  background: linear-gradient(145deg, #4c1d95, #2e1065);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6), 
+              -3px -3px 8px rgba(167, 139, 250, 0.2), 
+              inset 2px 2px 4px rgba(221, 214, 254, 0.3), 
+              inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+  color: #c4b5fd;
+}
+
+.clay-purple {
+  background: linear-gradient(145deg, #f3e8ff, #e9d5ff);
+  box-shadow: 6px 6px 14px rgba(147, 51, 234, 0.22), 
+              -4px -4px 10px rgba(255, 255, 255, 0.95), 
+              inset 2.5px 2.5px 4px rgba(255, 255, 255, 0.95), 
+              inset -2.5px -2.5px 5px rgba(126, 34, 206, 0.25);
+  color: #7e22ce;
+}
+.dark .clay-purple {
+  background: linear-gradient(145deg, #581c87, #3b0764);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6), 
+              -3px -3px 8px rgba(192, 132, 252, 0.2), 
+              inset 2px 2px 4px rgba(233, 213, 255, 0.3), 
+              inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+  color: #c084fc;
+}
+
+/* Clay Container Card (3D Puffy Card effect) */
+.clay-card {
+  border-radius: 1.5rem;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.06), 
+              -6px -6px 16px rgba(255, 255, 255, 0.85), 
+              inset 2px 2px 4px rgba(255, 255, 255, 0.9);
+}
+.dark .clay-card {
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.5), 
+              inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.08);
+}
+.clay-card:active {
+  transform: translateY(2px) scale(0.995);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), 
+              inset 3px 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 🌟 Smooth Claymorphism Modal Pop Transition */
+.modal-pop-enter-active,
+.modal-pop-leave-active {
+  transition: opacity 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-pop-enter-from {
+  opacity: 0;
+  transform: scale(0.86) translateY(20px);
+}
+
+.modal-pop-leave-to {
+  opacity: 0;
+  transform: scale(0.92) translateY(12px);
+}
+
+/* ========================================== */
+/* Portal mobile neumorphism — light/dark     */
+/* ========================================== */
+@media (max-width: 767px) {
+  .portal-neu-layout,
+  .home-header-neu-shell,
+  .portal-mobile-neu-main,
+  .portal-mobile-neu,
+  .bottom-nav-neu {
+    --neu-bg: #e8edf3;
+    --neu-surface: #e8edf3;
+    --neu-light: #ffffff;
+    --neu-dark: #c8d0dc;
+    --neu-raised: 9px 9px 18px var(--neu-dark), -9px -9px 18px var(--neu-light);
+    --neu-flat: 5px 5px 10px var(--neu-dark), -5px -5px 10px var(--neu-light);
+    --neu-pressed: inset 5px 5px 10px var(--neu-dark), inset -5px -5px 10px var(--neu-light);
+  }
+
+  html.dark .portal-neu-layout,
+  html.dark .home-header-neu-shell,
+  html.dark .portal-mobile-neu-main,
+  html.dark .portal-mobile-neu,
+  html.dark .bottom-nav-neu {
+    --neu-bg: #12151c;
+    --neu-surface: #12151c;
+    --neu-light: #1c212b;
+    --neu-dark: #080a0f;
+    --neu-raised: 9px 9px 18px var(--neu-dark), -6px -6px 14px var(--neu-light);
+    --neu-flat: 5px 5px 10px var(--neu-dark), -4px -4px 9px var(--neu-light);
+    --neu-pressed: inset 5px 5px 10px var(--neu-dark), inset -4px -4px 9px var(--neu-light);
+  }
+
+  .portal-neu-layout,
+  .home-header-neu-shell,
+  .portal-mobile-neu-main,
+  .portal-mobile-neu {
+    background: var(--neu-bg);
+  }
+
+  html.dark .bottom-nav-neu {
+    background: var(--neu-bg);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 -5px 14px rgba(0, 0, 0, 0.5);
+  }
+
+  html.dark .portal-mobile-neu .portal-neu-label {
+    color: #9aa3b2;
+  }
+
+  html.dark .portal-mobile-neu .portal-neu-tile-link > span {
+    color: #d1d5db;
+  }
+
+  html.dark .portal-mobile-neu .clay-card {
+    background: var(--neu-surface) !important;
+    color: #e5e7eb;
+  }
+
+  html.dark .portal-mobile-neu .clay-card h3,
+  html.dark .portal-mobile-neu .clay-card h4 {
+    color: #f3f4f6 !important;
+    border-bottom-color: transparent !important;
+  }
+
+  html.dark .portal-mobile-neu .clay-card .text-gray-800,
+  html.dark .portal-mobile-neu .clay-card .text-gray-900 {
+    color: #f3f4f6 !important;
+  }
+
+  html.dark .portal-mobile-neu .clay-card .text-gray-500,
+  html.dark .portal-mobile-neu .clay-card .text-gray-600 {
+    color: #9ca3af !important;
+  }
+
+  html.dark .portal-mobile-neu .portal-neu-list-item .text-gray-900 {
+    color: #f3f4f6 !important;
+  }
+
+  html.dark .portal-mobile-neu .portal-neu-list-item .text-pink-700 {
+    color: #f9a8d4 !important;
+  }
+
+  html.dark .bottom-nav-neu .text-slate-500 {
+    color: #9ca3af !important;
+  }
+
+  html.dark .bottom-nav-neu .text-blue-600 {
+    color: #93c5fd !important;
+  }
+
+  html.dark .bottom-nav-neu .bottom-nav-neu-fab {
+    color: #8bc34a;
+  }
+}

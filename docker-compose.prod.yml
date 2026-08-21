@@ -1,0 +1,53 @@
+services:
+  frontend:
+    container_name: ecobank-frontend-prod
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3001
+      - VITE_APP_TITLE=EcoBank
+    networks:
+      - ecobank_net
+
+  backend:
+    container_name: ecobank-backend-prod
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    env_file:
+      - .env
+    environment:
+      - MONGO_URI=mongodb://root:example@mongodb:27017/ecobank?authSource=admin
+    command: npm start
+    volumes:
+      - ecobank_uploads:/app/uploads
+    depends_on:
+      - mongodb
+    networks:
+      - ecobank_net
+
+  mongodb:
+    image: mongo:7
+    container_name: ecobank-mongodb-prod
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ecobank_mongo_data:/data/db
+    networks:
+      - ecobank_net
+
+volumes:
+  ecobank_mongo_data:
+  ecobank_uploads:
+
+networks:
+  ecobank_net:
+    driver: bridge

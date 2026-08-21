@@ -1,0 +1,25 @@
+{
+  "name": "EcoBank",
+  "short_name": "EcoBank",
+  "description": "Sistem Manajemen Bank Sampah",
+  "start_url": "/nasabah",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#2563eb",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/assets/ecobank-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/ecobank-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
